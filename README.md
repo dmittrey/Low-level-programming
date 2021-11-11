@@ -1,11 +1,10 @@
 # Low-level-programming
-работа | макс.баллов | кол-во
---- | --- | --- 
-| семинары                          |         2.5 |     16 |               |
-| [[https://gitlab.se.ifmo.ru/low-level-programming/programming-languages-fall-2021/assignment-1-io-library][Задание 1: основы ассемблера]]      |           5 |        |               
-| [[https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-dictionary/][Задание 2: ассемблер, словарь]]     |           3 |        |               
-| [[https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-image-rotation][Задание 3: C, поворот изображения]] |           5 |        |               
-| [[https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-memory-allocator][Задание 4: C, аллокатор]]     |           4 |        |               
-| [[https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-sepia-filter][Задание 5: C, сепия фильтр]]        |           5 |        
 
-
+работа | макс.баллов | кол-во | репозиторий
+--- | --- | --- | ---
+| семинары                          |         2.5 |     16 | [seminars](../tree/main/seminars)
+| [Задание 1: основы ассемблера](https://gitlab.se.ifmo.ru/low-level-programming/programming-languages-fall-2021/assignment-1-io-library) | 5 |  | [io-library](../tree/main/io-library)
+| [Задание 2: ассемблер, словарь](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-dictionary/) | 3 | | [dictionary](../tree/main/dictionary)
+| [Задание 3: C, поворот изображения](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-image-rotation) | 5 |
+| [Задание 4: C, аллокатор](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-memory-allocator) | 4 |
+| [Задание 5: C, сепия фильтр](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2021/assignment-sepia-filter) | 5 |
