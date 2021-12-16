@@ -7,50 +7,40 @@ global find_word
 ;	rdi - Dictionary start link
 ;Out:
 ;	rax - Entry string link or 0(failed status)
-find_word:
-	push r14	; Key length in node
-	push r13	; Null-term... string link
-	push r12	; Dictionary node link	
-	; Save callee-saved registers
-	
+find_word:	
 	; In nodes:
-	; 1) node key
-	; 2) next node link
+	; 1) next node link
+	; 2) node key
 	; 3) node value
 
-	mov r13, rsi
-	mov r12, rdi
+.loop:
+    push rdi
+	push rsi
 
-.loop:	
-	mov rdi, r12
-	call string_length	; Find key length in node
-	mov r14, rax
+    add rdi, 8          ; Jmp to key address
 	
-	mov rsi, r13
-	mov rdi, r12
-	call string_equals	; rdi and rsi decrements 
+    call string_equals  ; Compare keys
+
 	test rax, rax		; Test for 0 in rax(not equals)
 	jnz .found
 	
-	mov r12, [r12 + r14 + 1]
-	test r12, r12		; Check if next node exist
+    pop rsi
+    pop rdi
+	mov rdi, [rdi]      ; Jump to next node
+	test rdi, rdi		; Check if next node exist
 	jz .end
 	jmp .loop
 
 .end:
 	xor rax, rax
-	pop r12
-	pop r13
-	pop r14
 	ret
 
 .found:
-	mov rax, r12
-	add rax, 9
-	pop r12
-	pop r13
-	pop r14
-	ret
-	
+    pop rdi             ; Put key in rdi
 
+    call string_length  ; Calculate key size without Null-terminator
 
+    pop rdi             ; Convention
+    add rax, rdi
+    add rax, 9          ; Jump to node value
+    ret
