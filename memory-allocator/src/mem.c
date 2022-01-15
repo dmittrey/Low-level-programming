@@ -115,6 +115,8 @@ static struct region alloc_region(void const *const addr, const block_size query
     void *mapped_page_ptr = map_pages(addr, actual_region_size.bytes, MAP_FIXED_NOREPLACE);
     if (mapped_page_ptr == MAP_FAILED)
         mapped_page_ptr = map_pages(addr, actual_region_size.bytes, 0);
+    if (mapped_page_ptr == MAP_FAILED)
+        return REGION_INVALID;
 
     /* Разметим в блок */
     block_init(mapped_page_ptr, region_block_capacity, NULL);
@@ -122,7 +124,6 @@ static struct region alloc_region(void const *const addr, const block_size query
     return region_init(mapped_page_ptr, actual_region_size);
 }
 
-//todo Очень странный выбор места размещения метода
 static void *block_after(struct block_header const *block);
 
 /**
@@ -332,6 +333,8 @@ try_memalloc_existing(struct block_header *restrict block, const block_capacity 
     /* Найдем последний или хороший блок */
     struct block_search_result splittable_or_last_block = find_good_or_last(block, query_capacity);
 
+    if (splittable_or_last_block.type != BSR_FOUND_GOOD_BLOCK) return splittable_or_last_block;
+
     /* Поделим блок */
     split_if_too_big(splittable_or_last_block.block, query_capacity);
 
@@ -350,6 +353,8 @@ static struct block_header *grow_heap(struct block_header *restrict last, const 
 
     /* Аллоцируем новый регион(там сразу разметили блок) */
     const struct region new_region = alloc_region(new_region_adr, query_size);
+
+    if (region_is_invalid(&new_region)) return NULL;
 
     /* Перецепим ссылку с последней ноды первого региона на первую второго региона */
     last->next = new_region.addr;
@@ -383,7 +388,9 @@ memalloc(struct block_header *restrict const heap_start, const block_capacity qu
         const block_size query_size = size_from_capacity(query_capacity);
 
         /* Увеличим кучу на вместимость + заголовок */
-        grow_heap(block_search_result.block, query_size);
+        struct block_header *new_block = grow_heap(block_search_result.block, query_size);
+
+        if (new_block == NULL) return NULL;
 
         /* Ещё раз поищем в куче блок памяти */
         block_search_result = try_memalloc_existing(heap_start, query_capacity);

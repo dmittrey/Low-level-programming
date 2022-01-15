@@ -162,3 +162,21 @@ inline block_capacity capacity_from_size( block_size sz ) {
   Тесты должны запускаться из `main.c`, но могут быть описаны в отдельном (отдельных) файлах.
   Алгоритм не самый простой, легко ошибиться. Чтобы не тратить времени на отладку, обязательно делайте разбиение на маленькие функции!
 - Разберитесь с тем, как написан `Makefile` и исправьте его так, чтобы в итоговый код включался скомпилированный `main.c`. При желании вы можете написать свой `Makefile`, но только если он будет более красив и выразителен.
+  
+
+# Для самопроверки
+
+
+- Прочитайте [правила хорошего стиля](https://gitlab.se.ifmo.ru/c-language/main/-/wikis/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D1%81%D1%82%D0%B8%D0%BB%D1%8F-%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC-%D0%BD%D0%B0-C). Ваше решение 
+должно им соответствовать.
+- Проверьте архитектуру.
+- Пожалуйста, присылайте решение в виде pull-request. [Инструкция](https://gitlab.se.ifmo.ru/cse/main/-/wikis/%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D1%81%D0%BB%D0%B0%D1%82%D1%8C-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D1%83).  В крайнем случае допускается ссылка на репозиторий на https://gitlab.se.ifmo.ru или https://github.com .
+
+
+# Дополнительные материалы
+
+- Ulrich Drepper. ["What every programmer should know about memory"](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
+- [`man mmap` online](https://man7.org/linux/man-pages/man2/mmap.2.html)
+
+- [Статья Doug Lea о том, как работает аллокатор в `glibc`](http://gee.cs.oswego.edu/dl/html/malloc.html). Текущая версия аллокатора работает по более сложному алгоритму. 
+- [Исходный код одной из последних версий аллокатора в `glibc`. Очень много хорошо написанных комментариев](docs/malloc-impl.c)
